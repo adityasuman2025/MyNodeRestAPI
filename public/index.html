@@ -41,7 +41,7 @@
                     <div id="ninja-container">
                         <form id="search" onSubmit={this.handleSubmit}>                          
                             <input type="text" ref="name" placeholder="name" required />
-                            <input type="submit" value="Find Ninjas" />
+                            <input type="submit" value="Find" />
                         </form>
                         <ul>{ninjas}</ul>
                     </div>
@@ -52,7 +52,7 @@
 
                 var name = this.refs.name.value;
               
-                fetch('/api/hi?name=' + name).then(function(data){
+                fetch('/mongodb_api/user?name=' + name).then(function(data){
                     return data.json();
                 }).then( json => {
                     this.setState({

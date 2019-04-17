@@ -1,5 +1,4 @@
 var express = require('express');
-var Ninja = require('../models/ninjas');
 
 var app = express();
 
@@ -76,13 +75,20 @@ var app = express();
 		});
 	});
 
-	// app.delete('/users/:id', function(req, res, next)
-	// {
-	// 	Ninja.deleteOne({_id: req.params.id}).then(function(data)
-	// 	{
-	// 		res.send({"success": "done deletion"});
-	// 	}).catch(next);
-	// });
+	app.delete('/delete_user/:name', function(req, res, next)
+	{
+		ninjas.findOneAndDelete({name: req.params.name}, function(err, data)
+		{
+			if(err)
+			{
+				res.send({error: "database error"});
+			}
+			else
+			{
+				res.send(data);
+			}
+		});
+	});
 
 //exporting this file so that it can be used at other places
 	module.exports = app;
