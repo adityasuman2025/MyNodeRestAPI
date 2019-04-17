@@ -1,18 +1,15 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
+//imports
+	var express = require('express');
+	var bodyParser = require('body-parser');
+	var mongoose = require('mongoose');
 
-var routes = require('./routes/api');
+	var routes = require('./routes/api');
 
 //setting express
 	var app = express();
 
 //connect to mongoDB
-	if(mongoose.connect('mongodb://localhost/mood'))
-	{
-		console.log('Database connected')
-	}
-	else
+	if(!mongoose.connect('mongodb://localhost/mood'))
 	{
 		console.log("Database connecton failed");
 	}
@@ -27,13 +24,16 @@ var routes = require('./routes/api');
 	app.use(bodyParser.json());
 
 //setting up routes
+	app.get('/', function(req, res)
+	{
+		res.sendFile(__dirname + '/public/ko.html');
+	});
+
 	app.use('/api', routes);
 
 //error handling
 	app.use(function(err, req, res, next)
 	{
-		//console.log(err);
-
 		res.status(422).send({error: err.message});
 	});
 
