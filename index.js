@@ -3,8 +3,6 @@
 	var bodyParser = require('body-parser');
 	var mongoose = require('mongoose');
 
-	var routes = require('./routes/api');
-
 //setting express
 	var app = express();
 
@@ -29,7 +27,7 @@
 		res.sendFile(__dirname + '/public/ko.html');
 	});
 
-	app.use('/api', routes);
+	app.use('/mongodb_api', require('./routes/mongodb_api'));
 
 //error handling
 	app.use(function(err, req, res, next)
@@ -38,8 +36,7 @@
 	});
 
 //setup server
-	app.listen(process.env.PORT || 3000, function()
+	app.listen(process.env.PORT || 1000, function()
 	{
 		console.log("Server Running");
 	});
-

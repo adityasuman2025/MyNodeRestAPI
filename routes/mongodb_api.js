@@ -1,9 +1,17 @@
 var express = require('express');
 var Ninja = require('../models/ninjas');
 
-var router = express.Router();
+var app = express();
 
-router.get('/hi', function(req, res, next)
+app.get('/all_users', function(req, res, next)
+{
+	Ninja.find({}).then(function(data)
+	{
+		res.send(data);
+	});
+});
+
+app.get('/users', function(req, res, next)
 {
 	Ninja.find({name: req.query.name}).then(function(data)
 	{
@@ -11,7 +19,7 @@ router.get('/hi', function(req, res, next)
 	});
 });
 
-router.post('/hi', function(req, res, next)
+app.post('/users', function(req, res, next)
 {
 	Ninja.create(req.body).then(function(data)
 	{
@@ -19,7 +27,7 @@ router.post('/hi', function(req, res, next)
 	}).catch(next);
 });
 
-router.put('/hi/:id', function(req, res, next)
+app.put('/users/:id', function(req, res, next)
 {
 	Ninja.findOneAndReplace({_id: req.params.id}, req.body).then(function(data)
 	{
@@ -28,7 +36,7 @@ router.put('/hi/:id', function(req, res, next)
 	}).catch(next);
 });
 
-router.delete('/hi/:id', function(req, res, next)
+app.delete('/users/:id', function(req, res, next)
 {
 	Ninja.deleteOne({_id: req.params.id}).then(function(data)
 	{
@@ -37,4 +45,4 @@ router.delete('/hi/:id', function(req, res, next)
 });
 
 
-module.exports = router;
+module.exports = app;
