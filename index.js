@@ -20,6 +20,7 @@
 	});
 
 	app.use('/mongodb_api', require('./routes/mongodb_api'));
+	app.use('/mysql_api', require('./routes/mysql_api'));
 
 //error handling
 	app.use(function(err, req, res, next)
