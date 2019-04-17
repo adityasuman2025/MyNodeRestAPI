@@ -6,14 +6,6 @@
 //setting express
 	var app = express();
 
-//connect to mongoDB
-	if(!mongoose.connect('mongodb://localhost/mood'))
-	{
-		console.log("Database connecton failed");
-	}
-
-	mongoose.Promise = global.Promise;
-
 //to make external files work
 	app.use(express.static('public'));
 
