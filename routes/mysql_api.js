@@ -89,9 +89,9 @@ var app = express();
 		});
 	});
 
-	app.delete('/update_stud/:roll_no', function(req, res, err)
+	app.delete('/delete_stud/:roll_no', function(req, res, err)
 	{
-		con.query('UPDATE students SET ? WHERE roll_no = "' + req.params.roll_no + '"', req.body, function (error, results, fields)
+		con.query('DELETE FROM students WHERE roll_no = "' + req.params.roll_no + '"', function (error, results, fields)
 		{
 			if(error) 
 			{
