@@ -9,7 +9,7 @@ var app = express();
 
 //routes		
 	app.get('/all_users', function(req, res, next)
-	{
+	{		
 		ninjas.find({}, function(err, data)
 		{
 			if(err)
